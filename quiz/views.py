@@ -82,7 +82,6 @@ def submit(request, quiz_id):
 
 
 all_quizes = QuestionPaper.objects.all()
-print(all_quizes[0])
 list_quiz = [(x.subject, x.date) for x in all_quizes]
 
 
@@ -133,7 +132,8 @@ def qive_quiz(request, question_number):
 
 
 def finish(request):
-    global score
+    global score,paper
     this_score = score
     score = None
+    paper=None
     return render(request, 'quiz/finish.html', {'score': this_score, 'max_score': len(paper)})
