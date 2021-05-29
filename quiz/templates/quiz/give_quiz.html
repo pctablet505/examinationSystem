@@ -1,0 +1,41 @@
+{% extends 'quiz/layout.html' %}
+{% block body %}
+
+
+    <a href="{% url 'quiz:finish' %}">Finish Test</a>
+    <h2>Questioin</h2>
+    <p>{{ question }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Options</h2>
+        <ol type="1">
+            {% for i,option in options %}
+                <li>
+                    <label for="option">{{ option }}</label>
+                    <input type="radio" value="{{ i }}" name="selected_answer" required>
+                </li>
+
+            {% endfor %}
+        </ol>
+        {% if result == None %}
+            <input type="submit" value="Submit Answer">
+        {% endif %}
+    </form>
+    {% if result == True %}
+        <h1>Correct</h1>
+    {% elif result == False %}
+        <h1>Wrong Answer</h1>
+    {% endif %}
+
+
+    {% if question_number > 1 %}
+        <a href="{% url 'quiz:givequiz' question_number|add:-1 %}">Previous</a>
+    {% endif %}
+    {% if question_number < number_of_questions %}
+        <a href="{% url 'quiz:givequiz' question_number|add:1 %}">Next</a>
+    {% endif %}
+
+
+
+
+{% endblock %}

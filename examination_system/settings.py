@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -51,7 +51,24 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'examination_system.urls'
 
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': ['%s/jinjatemplates/' % (PROJECT_DIR), ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'autoescape': False
+        },
+    }
+]
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': ['%s/jinjatemplates/' % (PROJECT_DIR), ],
+        'APP_DIRS': True,
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
