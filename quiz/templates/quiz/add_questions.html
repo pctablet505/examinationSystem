@@ -1,0 +1,25 @@
+{% extends "quiz/layout.html" %}
+{% block body %}
+    <ol>
+        {% for question in questions %}
+            <li>
+                <label>{{ question.question }}</label>
+                <br>
+                <ol type="a">
+                    {% for option in question.options %}
+                        <li><label for="{{ option }}">{{ option }}</label></li>
+                    {% endfor %}
+                </ol>
+
+            </li>
+            <br>
+        {% endfor %}
+    </ol>
+
+    <form action="{% url 'quiz:add' quiz_id=quiz_id %}" id="create_quiz" method="post" style="display: block">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add">
+    </form>
+    <a href="{% url 'quiz:submit' quiz_id=quiz_id %}">Submit question Paper</a>
+{% endblock %}

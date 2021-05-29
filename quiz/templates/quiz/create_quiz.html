@@ -1,0 +1,10 @@
+{% extends "quiz/layout.html" %}
+{% block body %}
+
+
+    <form action="{% url 'quiz:create' %}" id="create_quiz" method="post" style="display: block">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Crete Quiz">
+    </form>
+{% endblock %}
